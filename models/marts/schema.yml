@@ -1,0 +1,50 @@
+models:
+  - name: dim_customers
+    columns:
+      - name: customer_id
+        description: "Primary key for customers"
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_location
+    columns:
+      - name: location_id
+        description: "Primary key for locations"
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_products
+    columns:
+      - name: product_id
+        description: "Primary key for products"
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_store
+    columns:
+      - name: store_id
+        description: "Primary key for stores"
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_date
+    columns:
+      - name: date_id
+        description: "Primary key for date dimension"
+        tests:
+          - not_null
+          - unique
+
+  - name: fact_sales_order
+    columns:
+      - name: sk_fact_sales
+        description: "Surrogate key for sales order fact table"
+        tests:
+          - not_null
+          - unique
+
+      
