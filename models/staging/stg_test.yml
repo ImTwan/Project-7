@@ -1,20 +1,4 @@
 models: 
-  - name: stg_customers 
-    description: "Staging table for customers data"
-    columns:
-    - name: customer_id
-      description: "Primary key for customers"
-      tests:
-        - not_null
-        - unique
-  - name: stg_location
-    description: "Staging table for locations data"
-    columns:
-    - name: location_id
-      description: "Primary key for locations"
-      tests:
-        - not_null
-        - unique
   - name: stg_products
     description: "Staging table for products data"
     columns:
