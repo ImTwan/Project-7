@@ -1,2 +1,6 @@
-SELECT DISTINCT store_id, store_name 
-FROM {{ ref('stg_store') }}
+WITH base_store AS (
+    SELECT *
+    FROM {{ ref('stg_store') }}
+)
+SELECT DISTINCT *
+FROM base_store

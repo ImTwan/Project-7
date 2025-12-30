@@ -1,13 +1,20 @@
-SELECT DISTINCT
+WITH base_customers AS (
+    SELECT *
+    FROM {{ ref('stg_customers') }}
+),
+customers_unique AS(
+    SELECT DISTINCT
+    -- Surrogate PK using both user_id_db and device_id to guarantee uniqueness
     ABS(
-      FARM_FINGERPRINT(
-          COALESCE(
-              CAST(user_id_db AS STRING),
-              device_id
-          )
-      )
-    )                                   AS customer_id   -- surrogate PK (positive INT64)
-  , user_id_db                          AS user_id_db
-  , device_id                           AS device_id
-  , email_address                       AS email_address
-FROM {{ ref('stg_customers') }}
+        FARM_FINGERPRINT(
+            CONCAT(user_id_db, '_', device_id)
+        )
+    ) AS customer_id,
+    
+    user_id_db,
+    device_id,
+    email_address
+FROM base_customers
+)
+SELECT * FROM customers_unique
+
