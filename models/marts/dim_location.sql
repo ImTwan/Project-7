@@ -2,21 +2,24 @@ WITH base_loc AS (
     SELECT *
     FROM {{ ref('stg_location') }}
 ),
+
 final_loc AS (
     SELECT DISTINCT
-        ABS(
-            FARM_FINGERPRINT(
-                CONCAT(
-                    COALESCE(country_name, ''), '|',
-                    COALESCE(region_name, ''), '|',
-                    COALESCE(city_name, '')
+        CAST(
+            ABS(
+                FARM_FINGERPRINT(
+                    CONCAT(
+                        COALESCE(country_name, ''), '|',
+                        COALESCE(region_name, ''), '|',
+                        COALESCE(city_name, '')
+                    )
                 )
-            )
-        ) AS location_id,   -- PK 
-        ip AS ip_address,                 -- natural key 
+            ) AS INT64
+        ) AS location_id,        
         country_name,
         region_name,
         city_name
-    FROM {{ ref('stg_location') }}
+    FROM base_loc
 )
+
 SELECT * FROM final_loc

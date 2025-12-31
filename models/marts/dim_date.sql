@@ -7,8 +7,7 @@ WITH calendar AS (
 ), 
 date_format AS(
     SELECT
-        CAST(CONCAT(FORMAT_DATE('%Y-%m-%d', date_full), ' 00:00:00') AS DATETIME) AS date_id, 
-
+        CAST(FORMAT_DATE('%Y%m%d', date_full) AS INT64) AS date_id, 
         date_full, 
         FORMAT_DATE('%A', date_full) AS day_of_week,  
         CASE
