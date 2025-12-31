@@ -4,7 +4,7 @@ WITH source_order AS (
     SELECT
         SAFE_CAST(gr.order_id AS STRING) AS order_id,
         LOWER(SAFE_CAST(gr.user_id_db AS STRING)) AS user_id_db,
-        SAFE_CAST(gr.device_id AS STRING) AS device_id,
+        SAFE_CAST(gr.email_address AS STRING) AS email_address,
 
         SAFE_CAST(SAFE_CAST(gr.store_id AS FLOAT64) AS INT64) AS store_id,
         gr.ip AS ip_address,
@@ -73,7 +73,7 @@ order_customer_dedup AS (
     SELECT
         order_id,
         user_id_db,
-        device_id,
+        email_address,
         store_id,
         ip_address,
         local_time,
@@ -84,6 +84,7 @@ order_customer_dedup AS (
             PARTITION BY order_id
             ORDER BY local_time
         ) AS rn
+
     FROM price_cleaned
 ),
 
@@ -92,7 +93,7 @@ orders AS (
     SELECT
         order_id,
         user_id_db,
-        device_id,
+        email_address,
         store_id,
         ip_address,
         local_time,
@@ -124,7 +125,7 @@ product_metrics AS (
 SELECT
     o.order_id,
     o.user_id_db,
-    o.device_id,
+    o.email_address,
     o.store_id,
     o.ip_address,
     o.local_time,

@@ -40,7 +40,7 @@ order_final AS (
 
     LEFT JOIN {{ ref('dim_customers') }} dc
         ON bo.user_id_db = dc.user_id_db
-       AND bo.device_id = dc.device_id
+       AND bo.email_address = dc.email_address
 
     LEFT JOIN {{ ref('dim_store') }} ds
         ON bo.store_id = ds.store_id

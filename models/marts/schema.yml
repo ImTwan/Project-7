@@ -42,7 +42,7 @@ models:
   - name: fact_sales_order
     columns:
       - name: SK_Fact_Sales
-        description: "Surrogate key for sales order fact table"
+        description: "Primary key for sales order fact table"
         tests:
           - not_null
           - unique
