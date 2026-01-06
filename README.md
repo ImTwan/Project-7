@@ -19,13 +19,18 @@ Resources: </br>
 
 # 2. Data Warehouse Design
 ## a. ERD Design
-<img src="D:\python_try_hard\unigap\project7\glamira\img\erd_diagram.png" alt="image" width="200"/>
+<img src="img\erd_diagram.png" alt="image" width="200"/>
 
 ## b. Tables
 * Fact table (fact_sales_order)
-** Primary key: SK_Fact_Sales (Suggorate key)
-** Foreign keys - Unique keys: order_id, product_id, date_id, location_id, customer_id,store_id
-
+- Primary key: SK_Fact_Sales (Suggorate key)
+- Foreign keys - Unique keys: order_id, product_id, date_id, location_id, customer_id,store_id
+* Dimension tables
+- dim_customers: customer_id - primary key
+- dim_date: date_id - primary key
+- dim_location: location_id - primary key 
+- dim_products: product_id - primary key
+- dim_store: store_id - primary key 
 
 # 3. Looker Dashboard
 ## a. Revenue analysis
