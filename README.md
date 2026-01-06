@@ -39,13 +39,19 @@ Resources: </br>
 * Scorecard: Total amount (revenue) through time UTC
 * Linegraph: TOTAL AMOUNT OVER TIME
 <img src="img\1.PNG" alt="image" width="1000"/>
+
+
 ## b. Geographic Distribution
 * Bar Chart: Total Amount by Location
 * Table: Location Detail
 <img src="img\2.PNG" alt="image" width="1000"/>
+
+
 ## c. Time-Based Trends
 * Line graph: Quantity Over Time, Order Over Time
 <img src="img\3.PNG" alt="image" width="1000"/>
+
+
 ## d. Product Performance
 * Bar chart: Total Amount by Product, Quantity by Product
 <img src="img\4.PNG" alt="image" width="1000"/>
