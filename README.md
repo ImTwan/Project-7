@@ -18,19 +18,19 @@ Resources: </br>
 - Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices 
 
 # 2. Data Warehouse Design
-## a. ERD Design
+## 2.1. ERD Design
 <img src="img\erd_diagram.png" alt="image" width="1000"/>
 
-## b. Tables
-* Fact table (fact_sales_order)
-- Primary key: SK_Fact_Sales (Suggorate key)
-- Foreign keys - Unique keys: order_id, product_id, date_id, location_id, customer_id,store_id
-* Dimension tables
-- dim_customers: customer_id - primary key
-- dim_date: date_id - primary key
-- dim_location: location_id - primary key 
-- dim_products: product_id - primary key
-- dim_store: store_id - primary key 
+## 2.2. Tables
+### a. Fact table (fact_sales_order)
+* Primary key: SK_Fact_Sales (Suggorate key)
+* Foreign keys - Unique keys: order_id, product_id, date_id, location_id, customer_id,store_id
+### b. Dimension tables
+* dim_customers: customer_id - primary key
+* dim_date: date_id - primary key
+* dim_location: location_id - primary key 
+* dim_products: product_id - primary key
+* dim_store: store_id - primary key 
 
 # 3. Looker Dashboard
 ## a. Revenue analysis
