@@ -1,14 +1,16 @@
-# 1. DBT Project </br>
+# 1. DBT Project 
 
-Welcome to your new dbt project! 🚀  </br>
-This repository contains a starter dbt setup to help you begin building analytics models and tests. </br>
+Welcome to your new dbt project! 🚀  
+This repository contains a starter dbt setup to help you begin building analytics models and tests. 
+Getting Started 
 
-Getting Started </br>
-
-Once your environment is set up, try running the following commands:</br>
-
-dbt run </br>
+Once your environment is set up, try running the following commands: 
+```
+dbt run 
+```
+```
 dbt test </br>
+```
 
 Resources: </br>
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction) </br>
