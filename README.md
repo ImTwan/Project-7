@@ -25,7 +25,7 @@ Resources: </br>
 ## b. Geographic Distribution
 * Bar Chart: Total Amount by Location
 * Table: Location Detail
-# 3. Time-Based Trends
+## c. Time-Based Trends
 * Line graph: Quantity Over Time, Order Over Time
-# 4. Product Performance
+## d. Product Performance
 * Bar chart: Total Amount by Product, Quantity by Product
