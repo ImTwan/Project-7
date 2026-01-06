@@ -19,7 +19,7 @@ Resources: </br>
 
 # 2. Data Warehouse Design
 ## a. ERD Design
-<img src="img\erd_diagram.png" alt="image" width="200"/>
+<img src="img\erd_diagram.png" alt="image" width="1000"/>
 
 ## b. Tables
 * Fact table (fact_sales_order)
