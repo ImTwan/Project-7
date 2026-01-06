@@ -17,8 +17,17 @@ Resources: </br>
 - Find [dbt events](https://events.getdbt.com) near you </br>
 - Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices 
 
+# 2. Data Warehouse Design
+## a. ERD Design
+<img src="D:\python_try_hard\unigap\project7\glamira\img\erd_diagram.png" alt="image" width="200"/>
 
-# 2. Looker Dashboard
+## b. Tables
+* Fact table (fact_sales_order)
+** Primary key: SK_Fact_Sales (Suggorate key)
+** Foreign keys - Unique keys: order_id, product_id, date_id, location_id, customer_id,store_id
+
+
+# 3. Looker Dashboard
 ## a. Revenue analysis
 * Scorecard: Total amount (revenue) through time UTC
 * Linegraph: TOTAL AMOUNT OVER TIME
