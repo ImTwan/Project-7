@@ -1,7 +1,7 @@
 # 1. DBT Project 
 
 Welcome to your new dbt project! 🚀  
-This repository contains a starter dbt setup to help you begin building analytics models and tests. 
+This repository contains a starter dbt setup to help you begin building analytics models and tests. </br>
 Getting Started 
 
 Once your environment is set up, try running the following commands: 
@@ -9,7 +9,7 @@ Once your environment is set up, try running the following commands:
 dbt run 
 ```
 ```
-dbt test </br>
+dbt test 
 ```
 
 Resources: </br>
@@ -38,10 +38,14 @@ Resources: </br>
 ## a. Revenue analysis
 * Scorecard: Total amount (revenue) through time UTC
 * Linegraph: TOTAL AMOUNT OVER TIME
+<img src="img\1.PNG" alt="image" width="1000"/>
 ## b. Geographic Distribution
 * Bar Chart: Total Amount by Location
 * Table: Location Detail
+<img src="img\2.PNG" alt="image" width="1000"/>
 ## c. Time-Based Trends
 * Line graph: Quantity Over Time, Order Over Time
+<img src="img\3.PNG" alt="image" width="1000"/>
 ## d. Product Performance
 * Bar chart: Total Amount by Product, Quantity by Product
+<img src="img\4.PNG" alt="image" width="1000"/>
