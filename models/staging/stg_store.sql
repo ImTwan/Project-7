@@ -1,13 +1,15 @@
-WITH source AS (
-    SELECT DISTINCT
-        SAFE_CAST(store_id AS INT64) AS store_id,
-        -- Create a default store_name, handle NULL store_id
-        COALESCE(CONCAT('store', SAFE_CAST(store_id AS STRING)), 'Not defined') AS store_name
-    FROM {{ source('glamira', 'glamira_raw') }}
-),
-renamed_stores AS (
+WITH source_store AS (
     SELECT *
-    FROM source
+    FROM {{ source('glamira', 'glamira_raw') }}
+    WHERE collection = 'checkout_success'
+),
+
+final_store_name AS (
+    SELECT DISTINCT
+        CAST(store_id AS INT64) AS store_id,
+        CONCAT('Store ', CAST(store_id AS STRING)) AS store_name
+    FROM source_store
 )
+
 SELECT *
-FROM renamed_stores
+FROM final_store_name

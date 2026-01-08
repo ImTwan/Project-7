@@ -1,24 +1,25 @@
-WITH base_loc AS (
+WITH base_location AS (
     SELECT DISTINCT
-        country_name,
-        region_name,
-        city_name
+        location_id,
+        REPLACE(country_name, '-', 'Not defined') AS country_name,
+        REPLACE(region_name, '-', 'Not defined') AS region_name,
+        REPLACE(city_name, '-', 'Not defined') AS city_name
     FROM {{ ref('stg_location') }}
+), 
+
+unknown_location AS (
+    SELECT
+        -1 AS location_id,
+        'Not defined' AS country_name,
+        'Not defined' AS region_name,
+        'Not defined' AS city_name
 )
 
 SELECT
-    CAST(
-        ABS(
-            FARM_FINGERPRINT(
-                CONCAT(
-                    COALESCE(country_name, ''), '|',
-                    COALESCE(region_name, ''), '|',
-                    COALESCE(city_name, '')
-                )
-            )
-        ) AS INT64
-    ) AS location_id,
-    country_name,
-    region_name,
-    city_name
-FROM base_loc
+    *
+FROM base_location
+
+UNION ALL
+
+SELECT *
+FROM unknown_location

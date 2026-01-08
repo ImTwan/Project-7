@@ -1,10 +1,8 @@
-# 1. DBT Project 
+# 1. Project Overview
+* This project builds a data warehouse for Glamira dataset using a Star Schema model with dbt + BigQuery.
+* Objective: Standardize data from staging → marts, and create dimension tables and a fact table to support BI / Analytics.
 
-Welcome to your new dbt project! 🚀  
-This repository contains a starter dbt setup to help you begin building analytics models and tests. </br>
-Getting Started 
-
-Once your environment is set up, try running the following commands: 
+# 2. DBT Project Configuration
 ```
 dbt run 
 ```
@@ -12,14 +10,7 @@ dbt run
 dbt test 
 ```
 
-Resources: </br>
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction) </br>
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers </br>
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support </br>
-- Find [dbt events](https://events.getdbt.com) near you </br>
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices 
-
-# 2. Project structure
+# 3. Project structure
 
 ```
 GLAMIRA/
@@ -49,19 +40,21 @@ GLAMIRA/
 │       ├── stg_store.sql        # Staged store data
 │       └── stg_test.yml         # Tests for staging models
 │
-├── seeds/                       # Static seed data (if any)
+├── seeds/                      # Static seed data (if any)
+│   ├── dim_fx_rate.csv
 ├── snapshots/                   # Slowly Changing Dimension (SCD) snapshots
 ├── target/                      # dbt compiled SQL & run artifacts (auto-generated)
 ├── tests/                       # Custom data tests
 ├── .gitignore                   # Git ignore configuration
+├── dbt_project.yml
 └── README.md                    # Project documentation
 ```
 
-# 3. Data Warehouse Design
-## 3.1. ERD Design
-<img src="img\erd_diagram.png" alt="image" width="1000"/>
+# 4. Data Warehouse Design
+## 4.1. ERD Design
+<img src="img\ERD.png" alt="image" width="1000"/>
 
-## 3.2. Tables
+## 4.2. Tables
 ### a. Fact table (fact_sales_order)
 * Primary key: SK_Fact_Sales (Suggorate key)
 * Foreign keys - Unique keys: order_id, product_id, date_id, location_id, customer_id,store_id
@@ -72,24 +65,30 @@ GLAMIRA/
 * dim_products: product_id - primary key
 * dim_store: store_id - primary key 
 
-# 4. Looker Dashboard
+# 5. Looker Dashboard
 ## a. Revenue analysis
-* Scorecard: Total amount (revenue) through time UTC
-* Linegraph: TOTAL AMOUNT OVER TIME
+
 <img src="img\1.PNG" alt="image" width="1000"/>
 
 
 ## b. Geographic Distribution
-* Bar Chart: Total Amount by Location
-* Table: Location Detail
+
 <img src="img\2.PNG" alt="image" width="1000"/>
 
 
 ## c. Time-Based Trends
-* Line graph: Quantity Over Time, Order Over Time
+
 <img src="img\3.PNG" alt="image" width="1000"/>
 
 
 ## d. Product Performance
-* Bar chart: Total Amount by Product, Quantity by Product
+
 <img src="img\4.PNG" alt="image" width="1000"/>
+
+
+# 6. DBT reference
+* Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction) </br>
+* Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers </br>
+* Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support </br>
+* Find [dbt events](https://events.getdbt.com) near you </br>
+* Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices 

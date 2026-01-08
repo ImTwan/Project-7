@@ -1,8 +1,25 @@
+{{ 
+  config(
+    materialized = 'incremental',
+    unique_key = 'SK_Fact_Sales',
+    incremental_strategy = 'merge'
+  ) 
+}}
+
 WITH base_order AS (
+
     SELECT *
     FROM {{ ref('stg_sales_order') }}
-),
 
+    {% if is_incremental() %}
+      -- Only load new or updated records
+      WHERE local_time > (
+          SELECT COALESCE(MAX(local_time), '1900-01-01 00:00:00') 
+          FROM {{ this }}
+      )
+    {% endif %}
+
+),
 
 order_final AS (
     SELECT 
@@ -10,33 +27,29 @@ order_final AS (
             ABS(
                 FARM_FINGERPRINT(
                     CONCAT(
-                        CAST(bo.order_id AS STRING), '_',
-                        CAST(bo.product_id AS STRING)
+                        bo.order_id, '|',
+                        bo.product_id
                     )
                 )
             ) AS INT64
         ) AS SK_Fact_Sales,
-        bo.order_id,
-        dp.product_id,
+        COALESCE(bo.order_id, -1) AS order_id,
+        COALESCE(dp.product_id, -1) AS product_id, 
         bo.date_id,
-        dl.location_id,
+        COALESCE(l.location_id, -1) AS location_id,
         bo.ip_address,
-        dc.customer_id,
-        ds.store_id,
+        COALESCE(dc.customer_id, -1) AS customer_id,
+        COALESCE(ds.store_id, -1) AS store_id, 
         bo.local_time,
-        bo.order_timestamp,
         bo.quantity,
-        bo.currency,
+        bo.currency_code,
         bo.price,
-        bo.total_amount
+        bo.revenue
 
         FROM base_order bo
 
     LEFT JOIN {{ ref('dim_products') }} dp
         ON bo.product_id = dp.product_id
-
-    LEFT JOIN {{ ref('dim_date') }} d
-        ON bo.date_id = d.date_id
 
     LEFT JOIN {{ ref('dim_customers') }} dc
         ON bo.user_id_db = dc.user_id_db
@@ -46,12 +59,8 @@ order_final AS (
         ON bo.store_id = ds.store_id
 
     LEFT JOIN {{ ref('stg_location') }} l
-        ON bo.ip_address = l.ip
+        ON bo.ip_address = l.ip_address
 
-    LEFT JOIN {{ ref('dim_location') }} dl
-        ON l.country_name = dl.country_name
-       AND l.region_name  = dl.region_name
-       AND l.city_name    = dl.city_name
 )
 
 SELECT * FROM order_final

@@ -39,3 +39,6 @@ models:
       +materialized: table
       +schema: marts_glamira
 
+seeds:
+  glamira:
+    +schema: staging_glamira
