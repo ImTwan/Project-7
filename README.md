@@ -1,6 +1,6 @@
 # 1. Project Overview
 * This project builds a data warehouse for Glamira dataset using a Star Schema model with dbt and BigQuery.
-* Objective: Standardize data from staging → marts, and create dimension tables and a fact table to support data analytics.
+* Objective: Standardize data from staging to marts, and create dimension tables and a fact table to support data analytics.
 
 # 2. DBT Project Configuration
 ```
