@@ -17,7 +17,7 @@ stg_order_unnest AS (
         PARSE_TIMESTAMP('%Y-%m-%d %H:%M:%S', local_time) AS local_time,
         CAST(cp.product_id AS INT64) AS product_id,
         
-        -- Chuẩn hóa currency_code
+        -- Normalize currency_code
         CASE TRIM(REGEXP_REPLACE(cp.currency, CONCAT('[', CHR(8206), CHR(8207), CHR(1564), ']'), ''))
             WHEN '€' THEN 'EUR'
             WHEN '£' THEN 'GBP'
@@ -64,7 +64,7 @@ stg_order_unnest AS (
 ),
 
 price_normalized AS (
-    -- Chuẩn hóa giá dạng string
+    -- Normalize price string
     SELECT
         COALESCE(sou.user_id_db, -1) AS user_id_db,
         sou.email_address,
@@ -93,7 +93,7 @@ price_normalized AS (
 
 
 customer_per_order AS (
-    -- Dedup khách hàng trong cùng 1 đơn hàng
+    -- Dedup customer per order
     SELECT
         order_id,
         user_id_db,
@@ -110,7 +110,7 @@ customer_per_order AS (
 ),
 
 order_per_customer AS (
-    -- Lấy khách hàng đầu tiên mỗi đơn hàng
+    -- order per customer after dedup
     SELECT
         order_id,
         user_id_db,
@@ -124,7 +124,7 @@ order_per_customer AS (
 ),
 
 product_metrics AS (
-    -- Tính tổng số lượng, tổng doanh thu, giá trung bình sản phẩm trong đơn hàng
+    -- Final metrics per product per order
     SELECT
         order_id,
         product_id,
